@@ -1,6 +1,25 @@
 #include <iostream>
-using namespace std;
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+
+
 int main() {
-    return 0;
+
+    int a[5] = {1,2,3,4,5};
+    int* start = a;
+    int* end = start + 4;
+
+    while (start < end) {
+        int temp = *start;
+        *start = *end;
+        *end = temp;
+        ++start;
+        --end;
+    }
+
+
+    std::cout << a[4] << " " << a[0] << std::endl;
+
+
 }
+
+
