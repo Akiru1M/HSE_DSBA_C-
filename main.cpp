@@ -3,6 +3,8 @@
 #include <thread>
 #include <string>
 #include <cstdlib>
+#include <iomanip>
+
 double random(double min, double max)
 {
     return (double)(rand())/RAND_MAX*(max - min) + min;
@@ -23,6 +25,7 @@ void output(std::string str) {
     std::cout << std::endl;
 }
 int main() {
+
     int n,m;
     const int time = 10000;
     std::cin >> n >> m ;
@@ -34,7 +37,7 @@ int main() {
         for(int j=0;j<m;++j) {
 
             matrix[i][j] = random(0.00, 100.00);
-            std::cout << matrix[i][j] << "\t";
+            std::cout << std::setprecision(2) << matrix[i][j] << "\t";
         }
         std::cout<<std::endl;
     }
@@ -48,13 +51,13 @@ int main() {
         matrix2[i] = new double[m2];
         for(int j=0;j<m2;++j) {
             matrix2[i][j] = random(0.00, 100.00);
-            std::cout << matrix2[i][j] << "\t";
+            std::cout<< std::setprecision(2) << matrix2[i][j] << "\t";
         }
         std::cout<<std::endl;
     }
-    output("Start");
+    std::cout<<"================================================================="<<std::endl;
     if (m==n2) {
-
+        output("Start");
         double** matrix3 = new double*[n];
         for (int i = 0; i < n; ++i) {
             matrix3[i] = new double[m2];
@@ -68,13 +71,14 @@ int main() {
                     std::this_thread::sleep_for(std::chrono::milliseconds(time/m/2/(m*m2)));
                 }
                 matrix3[i][j] = sum;
-                std::cout << matrix3[i][j] << "\t";
+                std::cout << std::setprecision(5) << matrix3[i][j] << "\t";
             }
             std::cout<<std::endl;
         }
+        output("End");
     } else
-        output("Не могу перемножить");
-    output("End");
+        output("Incorrect sizes");
+
 
 
 
