@@ -2,26 +2,57 @@
 #include <chrono>
 #include <thread>
 #include <string>
+#include <cstdlib>
+double random(double min, double max)
+{
+    return (double)(rand())/RAND_MAX*(max - min) + min;
+}
+
 int main() {
+    int n,m;
+    std::cin >> n >> m ;
+    //int arr[n][m];
 
+    double** matrix = new double*[n];
+    for(int i=0;i<n;++i) {
+        matrix[i] = new double[m];
+        for(int j=0;j<m;++j) {
 
-    int count = 0;
+            matrix[i][j] = random(0.00, 100.00);
+            std::cout << "\t" << matrix[i][j];
+        }
+        std::cout<<std::endl;
+    }
+    int n2,m2;
+    std::cin >> n2;
+    std::cin >> m2;
+    double** matrix2 = new double*[n2];
+    for(int i=0;i<n2;++i) {
+        matrix2[i] = new double[m2];
+        for(int j=0;j<m2;++j) {
+            matrix2[i][j] = random(0.00, 100.00);
+            std::cout << matrix[i][j] << "\t";
+        }
+        std::cout<<std::endl;
+    }
+    std::cout<<std::endl;
+    if (m==n2) {
 
-    std::string words[3] {"I Love DSBA.", "I Love HSE.", "I Love Seminars on C++"};
-
-    while (true) {
-        for (std::string word : words) {
-            count=0;
-            for (char i: word) {
-                std::cout << "\u001b[31m" << i;
-                count++;
-                std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        double** matrix3 = new double*[m];
+        for (int i = 0; i < n; i++) {
+            matrix3[i] = new double[n];
+            for (int j = 0; j < m2; j++) {
+                double sum = 0;
+                for (int k = 0; k < m; k++) {
+                    sum += matrix[i][k] * matrix[k][j];
                 }
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            for (int i = 0; i < count; i++) {
-                std::cout << '\b' << ' ' << '\b';
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                matrix3[i][j] = sum;
+                std::cout << matrix3[i][j] << "\t";
             }
+            std::cout<<std::endl;
         }
     }
+
+
+
 }
